@@ -1,3 +1,5 @@
+import React, { useState } from 'react'
+
 const Hello = (props) => {
   console.log(props)
 
@@ -14,19 +16,50 @@ const Hello = (props) => {
   )
 }
 
+const Display =(props) => {
+  return (
+    <div>{props.counter}</div>
+  )
+}
+
+const Button = (props) => {
+  return (
+    <button onClick={props.onClick}>
+      {props.text}
+    </button>
+  )
+} 
+
 
 const App = () => {
-  const name = 'Peter'
-  const age = 10
+  const [left, setLeft] = useState(0)
+  const [right, setRight] = useState(0)
+  const [allClicks, setAll] = useState([])
+  const [total, setTotal] = useState(0)
+
+  const handleLeftClick = () => {
+    setAll(allClicks.concat('L'))
+    setLeft(left+1)
+    setTotal(total+1)
+  }
+
+  const handleRightClick = () => {
+    setAll(allClicks.concat('R'))
+    setRight(right+1)
+    setTotal(total+1)
+  }
 
   return (
     <div>
-      <h1>Greetings</h1>
-      <Hello name='Leo' age={3+4}/>
-      <Hello name='Lilian' age ='4'/>
-      <Hello name={name} age={age}/>
+      {left}
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
+      {right}
+      <p>{allClicks.join('')}</p>
+      <p>Total clicks: {total}</p>
     </div>
   )
+  
 }
 
 export default App
