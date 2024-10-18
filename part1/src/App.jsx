@@ -22,14 +22,29 @@ const Display =(props) => {
   )
 }
 
-const Button = (props) => {
+const Button = ({handleClick, text}) => {
   return (
-    <button onClick={props.onClick}>
-      {props.text}
+    <button onClick={handleClick}>
+      {text}
     </button>
   )
 } 
 
+const Histoty =(props) => {
+  if (props.allClicks.length === 0) {
+    return (
+      <div>
+        The app is used by clicking the buttons
+      </div>
+    )
+  }
+  return (
+    <div>
+      <p>Button press history: {props.allClicks.join(' ')}</p>
+      <p>Total clicks {props.total}</p>
+    </div>
+  )
+}
 
 const App = () => {
   const [left, setLeft] = useState(0)
@@ -52,11 +67,10 @@ const App = () => {
   return (
     <div>
       {left}
-      <button onClick={handleLeftClick}>left</button>
-      <button onClick={handleRightClick}>right</button>
+      <Button handleClick={handleLeftClick} text='left' />
+      <Button handleClick={handleRightClick} text='right' />
       {right}
-      <p>{allClicks.join('')}</p>
-      <p>Total clicks: {total}</p>
+      <Histoty allClicks={allClicks} total={total}/>
     </div>
   )
   
