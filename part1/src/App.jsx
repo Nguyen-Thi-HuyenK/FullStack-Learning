@@ -31,6 +31,7 @@ const Button = ({handleClick, text}) => {
 } 
 
 const Histoty =(props) => {
+  console.log('props values are', props)
   if (props.allClicks.length === 0) {
     return (
       <div>
