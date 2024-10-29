@@ -5,12 +5,12 @@ import axios from 'axios';
 
 import App from './App';
 
-axios.get('http://localhost:3001/notes')
+/* axios.get('http://localhost:3001/notes')
       .then(response => {
         const notes = response.data
-        console.log(notes);
-        ReactDOM.createRoot(document.getElementById('root')).render(<App notes={notes} />);
-})
+        console.log(notes); */
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+/* }) */
 
 /* const promise2 = axios.get('http://localhost:3001/foobar');
 console.log(promise2); */
