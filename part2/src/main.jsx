@@ -1,9 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
+import axios from 'axios';
+
 import App from './App';
 
-const notes = [
+axios.get('http://localhost:3001/notes')
+      .then(response => {
+        const notes = response.data
+        console.log(notes);
+        ReactDOM.createRoot(document.getElementById('root')).render(<App notes={notes} />);
+})
+
+/* const promise2 = axios.get('http://localhost:3001/foobar');
+console.log(promise2); */
+
+/* const notes = [
   {
     id: 1,
     content: 'HTML is easy',
@@ -22,7 +34,7 @@ const notes = [
     date: '2019-05-30T19:20:14.298Z',
     important: true
   }
-]
+] */
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App notes={notes} />);
+
 
