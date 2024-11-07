@@ -24,6 +24,7 @@ let notes = [
 
 app.get('/api/notes/:id', (req, res) => {
   const id = req.params.id
+  
   const note = notes.find(note => note.id === id)
 
   if (note) {
