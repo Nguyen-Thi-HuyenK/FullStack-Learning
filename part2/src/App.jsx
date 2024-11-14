@@ -1,9 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import Note from './components/Note';
-import axios from 'axios';
 import noteService from './services/note';
-import note from './services/note';
+
 
 
 const App = () => {
@@ -26,16 +25,19 @@ const App = () => {
     const noteObject = {
       content: newNote,
       important: Math.random() < 0.5,
-      /* id: String(notes.length + 1), */
-    }
-    
+    };
+  
     noteService
-      .create (noteObject)
-      .then (returnedNote => {
-        setNotes(notes.concat(returnedNote ));
+      .create(noteObject)
+      .then(returnedNote => {
+        console.log('New note returned from server:', returnedNote);  // Log the returned note to confirm its structure
+        setNotes(notes.concat(returnedNote));
         setNewNote('');
       })
-  }
+      .catch(error => {
+        console.error('Error creating note:', error);
+      });
+  };
 
   const handleNoteChange = (event) => {
     console.log(event.target.value);
@@ -52,7 +54,7 @@ const App = () => {
       .then(returnedNote => {
         setNotes(notes.map(note => note.id === id ? returnedNote: note));
       })
-      .catch(erro => {
+      .catch(error => {
         alert (
           `the note '${note.content}' was already deleted from server`
         )
